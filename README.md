@@ -76,6 +76,21 @@ site, Netlify, Vercel, nginx, S3+CloudFront…):
 3. Add the deployed site's origin to the backend's `CORS_ALLOWED_ORIGINS`
    environment variable (e.g. `https://veltrix-admin.onrender.com`).
 
+### Deploying on Render
+
+The repo ships with a `render.yaml` blueprint (Render → **New → Blueprint** and
+point it at this repo, or New → Static Site). It defines:
+
+- Build command `npm ci && npm run build`, publish directory `dist`
+- SPA fallback rewrite (`/* → /index.html`) so refreshing a route like
+  `/users` doesn't 404
+- Security headers and immutable cache for hashed `/assets/*` files
+- `VITE_API_BASE_URL` build env var (edit it in `render.yaml` if your backend
+  lives at a different origin)
+
+After the first deploy, add the site's URL (e.g. `https://veltrix-admin.onrender.com`)
+to the backend's `CORS_ALLOWED_ORIGINS`.
+
 Deploy the admin frontend on a **different origin** than the customer frontend
 so customer traffic never carries admin tokens.
 
