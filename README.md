@@ -55,7 +55,7 @@ one created via the backend's `ensure_superuser` command).
 
 | Variable | Where | Default | Purpose |
 | --- | --- | --- | --- |
-| `VITE_API_BASE_URL` | build/runtime | *(empty)* | Backend origin, e.g. `https://veltrix-backend.onrender.com`. Empty means same-origin (use the dev proxy or serve behind the same domain). |
+| `VITE_API_BASE_URL` | build/runtime | *(empty)* | Backend origin, e.g. `https://veltrix-backend-5cwa.onrender.com`. Empty means same-origin (use the dev proxy or serve behind the same domain). |
 | `VITE_BACKEND_PROXY_TARGET` | dev only | `http://127.0.0.1:3000` | Where the Vite dev proxy forwards `/api` and `/health`. |
 
 Copy `.env.example` to `.env` to customize. `VITE_*` variables are embedded at

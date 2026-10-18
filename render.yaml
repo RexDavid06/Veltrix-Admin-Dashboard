@@ -7,7 +7,7 @@ services:
     pullRequestPreviewsEnabled: true
     envVars:
       - key: VITE_API_BASE_URL
-        value: https://veltrix-backend.onrender.com
+        value: https://veltrix-backend-5cwa.onrender.com
     routes:
       - type: rewrite
         source: /*
