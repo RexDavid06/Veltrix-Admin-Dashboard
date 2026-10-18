@@ -4,7 +4,7 @@ import api, { apiErrorDetail } from "../api";
 import { clearSession, saveSession, saveSessionUser, getSessionUser, hasSession } from "../auth";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -21,7 +21,7 @@ export default function Login() {
     setError("");
     setBusy(true);
     try {
-      const { data } = await api.post("/api/auth/token/", { username: email.trim(), password });
+      const { data } = await api.post("/api/auth/token/", { username: username.trim(), password });
       saveSession({ access: data.access, refresh: data.refresh });
 
       // Fetch the profile, then probe an admin endpoint so non-admin accounts
@@ -38,7 +38,7 @@ export default function Login() {
       navigate("/", { replace: true });
     } catch (err) {
       if (err?.response?.status === 401 || err?.response?.status === 400) {
-        setError("Invalid email or password.");
+        setError("Invalid username or password.");
       } else {
         setError(apiErrorDetail(err));
       }
@@ -54,12 +54,12 @@ export default function Login() {
         <p className="subtitle">Sign in with an administrator account</p>
         {error && <div className="banner banner-error">{error}</div>}
         <label className="field">
-          <span>Email</span>
+          <span>Username</span>
           <input
-            type="email"
+            type="text"
             autoComplete="username"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
             autoFocus
           />
